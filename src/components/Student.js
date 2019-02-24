@@ -2,12 +2,13 @@ import React from 'react';
 
 class Students extends React.Component{
     render(){
-        const {students} = this.props;
+        const students = this.props.students;
+        const totaldays = this.props.totaldays;
         const studentList = students.map(student => {
             return(
                 <div key = {student.roll} >
                     <h3>Name : {student.name} Roll : {student.roll} </h3>
-                    <h5>Present: {student.present}</h5>
+                    <h5>Present: {student.present} Absent: {totaldays - student.present}</h5>
                 </div>
             )
         });

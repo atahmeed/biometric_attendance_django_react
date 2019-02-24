@@ -3,7 +3,8 @@ import Students from '../components/Student';
 import axios from 'axios'
 class StudentList extends React.Component{
     state = {
-        students : []
+        students : [],
+        totaldays: 0
     }
     getData(){
         axios.get('http://127.0.0.1:8000/api/student')
@@ -11,7 +12,21 @@ class StudentList extends React.Component{
                 this.setState({
                     students: res.data
                 });
-            })
+            });
+            axios.get('http://127.0.0.1:8000/api/attendance')
+            .then(res => {
+                var attendance = res.data;
+                var flags = [], output = [], l = attendance.length, i;
+                for( i=0; i<l; i++) {
+                    if( flags[attendance[i].date]) continue;
+                    flags[attendance[i].date] = true;
+                    output.push(attendance[i].date);
+                }
+                var totaldays = output.length;
+                this.setState({
+                    totaldays
+                });
+            });
     }
     componentDidMount(){
         this.getData();
@@ -24,7 +39,7 @@ class StudentList extends React.Component{
     }
     render(){
         return(
-            <Students students = {this.state.students}/>
+            <Students students = {this.state.students} totaldays={this.state.totaldays}/>
         )
     }
 }

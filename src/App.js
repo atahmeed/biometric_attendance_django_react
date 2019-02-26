@@ -4,8 +4,7 @@ import StudentList from './containers/StudentListView'
 class App extends Component {
   render() {
     return (
-      <div className="App" align="center">
-        <h1>Course: IOT</h1>
+      <div className="App">
         <CustomLayout>
           <StudentList/>
         </CustomLayout>  

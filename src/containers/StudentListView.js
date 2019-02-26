@@ -32,7 +32,7 @@ class StudentList extends React.Component{
         this.getData();
         this.interval = setInterval(() => {
             this.getData();
-        },100); 
+        },500); 
     }
     componentWillUnmount(){
         clearInterval(this.interval);
